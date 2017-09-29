@@ -23,7 +23,8 @@ namespace TestingLayout.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-            int a = 800;
+
+            int a = 7;
             return View();
         }
     }
