@@ -1,8 +1,6 @@
 ﻿
 
 body {
-    
-    
     margin: 0px;
 }
 
@@ -16,70 +14,64 @@ body {
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,select,textarea {
+input, select, textarea {
     max-width: 280px;
 }
 
 .topgrid {
-  display: grid;
-  grid-template-columns: 11px 200px 4fr 100px 10px;
-  grid-template-rows: 50px;
-  grid-template-areas:
-    ". leftlogo header rightuserdetails .";
-    
-    
-  width: 100%;
-  
-   
+    display: grid;
+    grid-template-columns: 11px 200px 4fr 100px 10px;
+    grid-template-rows: 50px;
+    grid-template-areas: ". leftlogo header rightuserdetails .";
+    width: 100%;
 }
 
 .leftlogo {
-  grid-area: leftlogo;
-  background-color: green;
+    grid-area: leftlogo;
+    background-color: green;
 }
+
 .header {
-  grid-area: header;
-  background-color: grey;
+    grid-area: header;
+    background-color: grey;
 }
+
 .rightuserdetails {
-  grid-area: rightuserdetails;
-  background-color: yellow;
+    grid-area: rightuserdetails;
+    background-color: yellow;
 }
 
 
 
 
 .grid {
-  display: grid;
-  margin-top: 50px;
-  grid-template-columns: 10px 200px 4fr 100px 10px;
-  grid-template-rows: 1.5em 5fr 1.5em;
-  grid-template-areas:
+    display: grid;
+    margin-top: 51px;
+    margin-left: 1px;
     
-    ". leftmenu topmenu topmenu ."
-    ". leftmenu main main ."
-    ". footer footer footer .";
-  grid-gap: 1px;
-  
-  width: 100%;
-  height: 90vh;
-   
+    grid-template-columns: 10px 200px 4fr 100px 10px;
+    grid-template-rows: 1.5em 5fr 1em;
+    grid-template-areas: 
+        ". leftmenu topmenu topmenu ." 
+        ". leftmenu main main ."
+        ". . . . .";
+    width: 100%;
+    height: calc(100vh - 51px);
+    /*height: 95vh;*/
 }
 
 
 .topmenu {
-  grid-area: topmenu;
-  background-color: orange;
+    grid-area: topmenu;
+    background-color: orange;
 }
+
 .leftmenu {
-  grid-area: leftmenu;
-  background-color: blue;
+    grid-area: leftmenu;
+    background-color: blue;
 }
+
 .main {
-  grid-area: main;
-  background-color: yellow;
-}
-.footer {
-  grid-area: footer;
-  background-color: brown;
+    grid-area: main;
+    background-color: yellow;
 }
