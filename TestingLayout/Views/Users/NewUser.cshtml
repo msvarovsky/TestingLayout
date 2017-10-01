@@ -1,5 +1,5 @@
-﻿@model TestingLayout.Models
-
+﻿@*@model TestingLayout.Models.NewUserViewModel*@
+@model TestingLayout.Models.User
 @{
     ViewBag.Title = "NewUser";
 }
@@ -10,23 +10,48 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>User</h4>
+    <div>
+        <h4>Language: @ViewBag.Language</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
 
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            @*@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>*@
+
+            <div class="editor-field">
+                @*<label>@Model.GetLabel("name")</label>*@
+                <label>@Model.aa()</label>
+
+                @*<label>@ViewBag.Labels["name".ToLower()]==null ? "****" : Labels["name"]</label>*@
+
+                @*<label>@ViewBag.Labels.ContainsKey("name") ? @ViewBag.Labels["name"] : "**" </label>*@
+
+                @*@Html.TextArea("name", "")*@
             </div>
 
-            @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList()
-               model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+            <div class="editor-field">
+                @*<label>@Model.GetLabel("gender")</label>*@
+
+                @*@Html.DropDownList("genders", Model.GetLabel("select..."))*@
+
+                @*@Html.DropDownList("Pohlavi", ((SelectList)ViewBag.Genders), Model.GetLabel("select..."))*@
+
+                @*@Html.DropDownList("Pohlavi", ((SelectList)ViewBag.Genders), "select...")*@
+
+
+
+
+
+
+
+
+
+
             </div>
 
         </div>
@@ -37,6 +62,11 @@
             </div>
         </div>
     </div>
+
+    @section topmenu
+    {
+        Top Menu
+    }
 }
 
 <div>

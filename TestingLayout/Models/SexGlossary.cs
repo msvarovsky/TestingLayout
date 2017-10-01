@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace TestingLayout.Models
 {
     public class CSex
     {
-        public string Sex { get; set; }
+        public string SexCode { get; set; }
         public string SexName { get; set; }
     }
 
@@ -26,7 +27,7 @@ namespace TestingLayout.Models
             string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\!Martin\Osobni\Programovani\TestingLayout\TestingLayout\App_Data\Data.mdf;Integrated Security=True";
             SqlConnection con = new SqlConnection(connectionString);
 
-            using (SqlCommand cmd = new SqlCommand("SELECT  Sex, SexName FROM GL_Sex WHERE [Language] = @language", con))
+            using (SqlCommand cmd = new SqlCommand("SELECT SexCode, SexName FROM GL_Sex WHERE [Language] = @language", con))
             {
                 cmd.Parameters.AddWithValue("@language", language);
                 con.Open();
@@ -40,7 +41,7 @@ namespace TestingLayout.Models
                         while (reader.Read())
                         {
                             CSex s = new CSex();
-                            s.Sex = reader.GetString(reader.GetOrdinal("Sex"));
+                            s.SexCode = reader.GetString(reader.GetOrdinal("Sex"));
                             s.SexName = reader.GetString(reader.GetOrdinal("SexName"));
                             seznam.Add(s);
                         }
@@ -49,5 +50,6 @@ namespace TestingLayout.Models
             }
             return seznam;
         }
+     
     }
 }

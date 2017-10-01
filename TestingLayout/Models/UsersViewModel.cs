@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 namespace TestingLayout.Models
 {
@@ -15,40 +11,31 @@ namespace TestingLayout.Models
 
         public string Sex { get; set; }
         public string lSex { get; set; }
+
+        public User()
+        {
+
+        }
+        public string aa()
+        {
+            return "aaa";
+        }
     }
+
     public class UsersViewModel
     {
-        public List<User> seznam { get; set; }
+        public List<User> UserData { get; set; }
+        public Dictionary<string, string> SystemLabels { get; set; }
 
-        public UsersViewModel()
+        public UsersViewModel(string LanguageCode="en")
         {
-            seznam = new List<User>();
+            UserData = new List<User>();
+            SystemLabels = new Dictionary<string, string>();
+            
+            LoadUserData();
         }
-
-        public string Add(User u)
-        {
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\!Martin\Osobni\Programovani\TestingLayout\TestingLayout\App_Data\Data.mdf;Integrated Security=True";
-            try
-            {
-                using (SqlConnection con = new SqlConnection(connectionString))
-                {
-                    SqlCommand cmd = new SqlCommand("AddUser", con);
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter { ParameterName = "@name", Value = u.Name });
-                    cmd.Parameters.Add(new SqlParameter { ParameterName = "@sex", Value = u.Sex });
-
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                }
-                return null;
-            }
-            catch (Exception e)
-            {
-                return e.ToString();
-            }
-        }
-
-        public void Load()
+        
+        private void LoadUserData()
         {
             string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\!Martin\Osobni\Programovani\TestingLayout\TestingLayout\App_Data\Data.mdf;Integrated Security=True";
             SqlConnection con = new SqlConnection(connectionString);
@@ -56,29 +43,60 @@ namespace TestingLayout.Models
             using (SqlCommand cmd = new SqlCommand("SELECT Id, Name, Sex FROM Users", con))
             {
                 con.Open();
-
-
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    // Check is the reader has any rows at all before starting to read.
                     if (reader.HasRows)
                     {
-                        // Read advances to the next row.
                         while (reader.Read())
                         {
                             User u = new User();
-
                             u.ID = reader.GetInt32(reader.GetOrdinal("Id"));
                             u.Name = reader.GetString(reader.GetOrdinal("name"));
                             u.Sex = reader.GetString(reader.GetOrdinal("sex"));
-
-                            seznam.Add(u);
+                            UserData.Add(u);
                         }
                     }
                 }
             }
+        }
 
+        public Dictionary<string, string> LoadSystemLabels(string ViewModel, string LanguageCode)
+        {
+            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\!Martin\Osobni\Programovani\TestingLayout\TestingLayout\App_Data\Data.mdf;Integrated Security=True";
+            SqlConnection con = new SqlConnection(connectionString);
+            Dictionary<string, string> ret = new Dictionary<string, string>();
 
+            using (SqlCommand cmd = new SqlCommand("SELECT LabelCode, Label FROM SystemLabels WHERE [LanguageID] = @language AND [ViewModel] = @ViewModel", con))
+            {
+                cmd.Parameters.AddWithValue("@language", LanguageCode);
+                cmd.Parameters.AddWithValue("@viewmodel", ViewModel);
+                con.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            string k = reader.GetString(reader.GetOrdinal("LabelCode")).Trim();
+                            string v = reader.GetString(reader.GetOrdinal("Label")).Trim();
+                            ret.Add(k, v);
+                        }
+                    }
+                }
+            }
+            return ret;
+        }
+
+        public string GetLabel(string LabelCode)
+        {
+            string ret;
+            SystemLabels.TryGetValue(LabelCode.ToLower(), out ret);
+
+            if (ret == null)
+                return "**" + LabelCode + "**"; 
+                        
+            return ret;
         }
 
        

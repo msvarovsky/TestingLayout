@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 
 namespace TestingLayout.Controllers
@@ -23,9 +20,20 @@ namespace TestingLayout.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
-            int a = 7;
             return View();
+        }
+        
+        public ActionResult LanguageChange()
+        {
+            HttpCookie c = Request.Cookies["Language"];
+
+            if (c.Value == "en")
+                c.Value = "cs";
+            else
+                c.Value = "en";
+
+            Response.Cookies.Add(c);
+            return Redirect(Request.UrlReferrer.ToString());
         }
     }
 }

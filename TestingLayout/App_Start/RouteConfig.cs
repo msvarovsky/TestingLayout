@@ -14,6 +14,12 @@ namespace TestingLayout
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Lang",
+                url: "Home/LanguageChange",
+                defaults: new { controller = "Home", action = "LanguageChange", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "UsersAdmin",
                 url: "users/{action}/{id}",
                 defaults: new { controller = "Users", action = "AllUsers", id = UrlParameter.Optional }

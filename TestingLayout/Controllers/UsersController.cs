@@ -10,36 +10,42 @@ namespace TestingLayout.Controllers
     public class UsersController : Controller
     {
         UsersViewModel uvm;
-
+        NewUserViewModel nuvm;
         // GET: Users
         public ActionResult AllUsers()
         {
-            uvm = new UsersViewModel();
-            uvm.Load();
+            uvm = new UsersViewModel(Request.Cookies["Language"].Value);
             return View(uvm);
         }
 
         [HttpGet]
         public ActionResult NewUser()
         {
-
-
-
-            SexGlossary sg = new SexGlossary();
-            sg.GetAllSexes("en");
-
-            return View(sg);
+            NewUserViewModel nu = new NewUserViewModel(Request.Cookies["Language"].Value);
+            ViewBag.Language = Request.Cookies["Language"].Value.ToString();
+            ViewBag.Genders = nu.gender;
+            ViewBag.Labels = nu.SystemLabels;
+            //return View(nu);
+            User u = new Models.User();
+            return View(u);
         }
 
         [HttpPost]
-        public ActionResult NewUser(FormCollection fc)
+        public ActionResult NewUser(User u)
         {
-            uvm = new UsersViewModel();
-
-            string ret = uvm.Add(new Models.User { Name = fc["Name"], Sex = fc["Sex"] });
-            if (ret != null)
-                return Content(ret);
             return RedirectToAction("AllUsers");
         }
+
+        /*public ActionResult NewUser(FormCollection fc)
+        {
+            string aa = fc["gender"];
+            nuvm = new NewUserViewModel(Request.Cookies["Language"].Value);
+            string ret = nuvm.Add(new Models.User { Name = fc["Name"], Sex = fc["Sex"] });
+
+            if (ret != null)
+                return Content(ret);
+
+            return RedirectToAction("AllUsers");
+        }*/
     }
 }

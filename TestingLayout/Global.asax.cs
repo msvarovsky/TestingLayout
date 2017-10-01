@@ -17,5 +17,17 @@ namespace TestingLayout
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            HttpCookie c = HttpContext.Current.Request.Cookies["Language"];
+
+            if (c == null || c.Value == null)
+            {
+                c = new HttpCookie("Language","en");
+                Response.Cookies.Add(c);
+            }
+
+        }
     }
 }
