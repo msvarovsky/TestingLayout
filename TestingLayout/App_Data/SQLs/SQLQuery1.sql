@@ -2,7 +2,7 @@
 
 
 
-sp_helptext AddUser
+sp_helptext spGetLabels
 
 select * from Users
 
@@ -12,3 +12,23 @@ WHERE	[Language] = 'en'
 
 
 exec AddUser 'test', 't'
+
+
+
+CREATE PROCEDURE spGetLabels
+(
+    @ViewModel VARCHAR(50),
+    @LanguageCode VARCHAR(2)
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+	SELECT	*
+	FROM	SystemLabels
+
+    insert into DataBase1.dbo.tableName values(@name,@address);
+    
+    insert into DataBase2.dbo.tableName(name,address) values(@name,@address)
+    
+END

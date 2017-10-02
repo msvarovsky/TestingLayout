@@ -25,8 +25,10 @@ namespace TestingLayout.Controllers
             ViewBag.Language = Request.Cookies["Language"].Value.ToString();
             ViewBag.Genders = nu.gender;
             ViewBag.Labels = nu.SystemLabels;
+
             //return View(nu);
-            User u = new Models.User();
+            User u = new Models.User("newuser", Request.Cookies["Language"].Value.ToString());
+            u.Sex = "m";
             return View(u);
         }
 

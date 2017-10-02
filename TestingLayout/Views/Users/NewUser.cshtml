@@ -1,7 +1,8 @@
-﻿@*@model TestingLayout.Models.NewUserViewModel*@
-@model TestingLayout.Models.User
+﻿@model TestingLayout.Models.User
+
 @{
     ViewBag.Title = "NewUser";
+    
 }
 
 <h2>NewUser</h2>
@@ -9,64 +10,62 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-    <div>
-        <h4>Language: @ViewBag.Language</h4>
+    
+    <div class="form-horizontal">
+        <h4>User</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
         <div class="form-group">
-
-            @*@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                </div>*@
-
-            <div class="editor-field">
-                @*<label>@Model.GetLabel("name")</label>*@
-                <label>@Model.aa()</label>
-
-                @*<label>@ViewBag.Labels["name".ToLower()]==null ? "****" : Labels["name"]</label>*@
-
-                @*<label>@ViewBag.Labels.ContainsKey("name") ? @ViewBag.Labels["name"] : "**" </label>*@
-
-                @*@Html.TextArea("name", "")*@
+            @Html.LabelFor(model => model.Name, Model.GetLabel("name"), htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-
-            <div class="editor-field">
-                @*<label>@Model.GetLabel("gender")</label>*@
-
-                @*@Html.DropDownList("genders", Model.GetLabel("select..."))*@
-
-                @*@Html.DropDownList("Pohlavi", ((SelectList)ViewBag.Genders), Model.GetLabel("select..."))*@
-
-                @*@Html.DropDownList("Pohlavi", ((SelectList)ViewBag.Genders), "select...")*@
-
-
-
-
-
-
-
-
-
-
+        @*<div class="form-group">*@
+        <div class="form-group" style="display: none;">
+            @Html.LabelFor(model => model.Email, Model.GetLabel("email"), htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
+        </div>
 
+        <div class="form-group" style="display:normal">
+            @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Sex, Model.IsReadOnly(false) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } } : new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Active, Model.GetLabel("status"), htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Active, new { htmlAttributes = new { @readonly = "true" } })
+                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastLogin, Model.GetLabel("lastlogin"), htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastLogin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastLogin, "", new { @class = "text-danger" })
+            </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
-
-    @section topmenu
-    {
-        Top Menu
-    }
 }
 
 <div>

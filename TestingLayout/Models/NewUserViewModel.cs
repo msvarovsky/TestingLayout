@@ -71,7 +71,7 @@ namespace TestingLayout.Models
             SqlConnection con = new SqlConnection(connectionString);
             Dictionary<string, string> ret = new Dictionary<string, string>();
 
-            using (SqlCommand cmd = new SqlCommand("SELECT LabelCode, Label FROM SystemLabels WHERE [LanguageID] = @language AND [ViewModel] = @ViewModel", con))
+            using (SqlCommand cmd = new SqlCommand("SELECT LabelCode, Label FROM SystemLabels WHERE [LanguageCode] = @language AND [ViewModel] = @ViewModel", con))
             {
                 cmd.Parameters.AddWithValue("@language", LanguageCode);
                 cmd.Parameters.AddWithValue("@viewmodel", ViewModel);

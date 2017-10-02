@@ -1,24 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using TestingLayout.Models.Shared;
 
 namespace TestingLayout.Models
 {
-    public class User
+    public class User : CLabelManagerBase
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public string lName { get; set; }
-
+        //public string lName { get; set; }
+        public string Email { get; set; }
         public string Sex { get; set; }
-        public string lSex { get; set; }
+        //public string lSex { get; set; }
+        public bool Active { get; set; }
+        public System.DateTime? LastLogin { get; set; }
 
-        public User()
+        public User():base()
         {
 
         }
-        public string aa()
+
+        public bool IsReadOnly(bool a)
         {
-            return "aaa";
+            return a;
+            //return a? "readonly" : "";
+        }
+
+        public User(string ViewModel, string LanguageCode="en"): base(ViewModel, LanguageCode="en")
+        {
+            Name = "New name...";
+            Active = true;
         }
     }
 
