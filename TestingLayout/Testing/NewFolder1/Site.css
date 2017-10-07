@@ -1,0 +1,83 @@
+﻿
+
+body {
+    margin: 0px;
+}
+
+
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input, select, textarea {
+    max-width: 280px;
+}
+
+.topgrid {
+    display: grid;
+    grid-template-columns:  11px 200px 4fr 100px 10px;
+    grid-template-rows:     50px 25px;
+    grid-template-areas:    ". leftlogo header rightuserdetails ."
+                            ". mainmenu mainmenu mainmenu .";
+    width: 100%;
+}
+
+.leftlogo {
+    grid-area: leftlogo;
+    background-color: green;
+}
+
+.header {
+    grid-area: header;
+    background-color: grey;
+}
+
+.rightuserdetails {
+    grid-area: rightuserdetails;
+    background-color: yellow;
+}
+
+
+.mainmenu {
+    grid-area: mainmenu;
+    background-color: pink;
+}
+
+
+
+.grid {
+    display: grid;
+    margin-top: 75px;
+    margin-left: 1px;
+    
+    grid-template-columns: 10px 200px 4fr 100px 10px;
+    grid-template-rows: 1.5em 5fr 1em;
+    grid-template-areas: 
+        ". leftmenu topmenu topmenu ." 
+        ". leftmenu main main ."
+        ". . . . .";
+    width: 100%;
+    height: calc(100vh - 51px);
+    /*height: 95vh;*/
+}
+
+
+.topmenu {
+    grid-area: topmenu;
+    background-color: orange;
+}
+
+.leftmenu {
+    grid-area: leftmenu;
+    background-color: blue;
+}
+
+.main {
+    grid-area: main;
+    background-color: yellow;
+}

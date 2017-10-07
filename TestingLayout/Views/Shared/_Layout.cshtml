@@ -14,9 +14,13 @@
     <div class="topgrid w3-top">
         <div class="leftlogo">LeftLogo</div>
         <div class="rightuserdetails">
-            @Html.ActionLink("Language","LanguageChange","Home")
+            @Html.ActionLink("Language", "LanguageChange", "Home")
         </div>
         <div class="header">Header</div>
+        <div class="mainmenu">
+            ahojky-mainmenu
+            @Html.Partial("MainMenuPartial")
+        </div>
     </div>
 
     <div class="grid">

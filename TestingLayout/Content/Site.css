@@ -20,15 +20,16 @@ input, select, textarea {
 
 .topgrid {
     display: grid;
-    grid-template-columns: 11px 200px 4fr 100px 10px;
-    grid-template-rows: 50px;
-    grid-template-areas: ". leftlogo header rightuserdetails .";
+    grid-template-columns:  11px 200px 4fr 100px 10px;
+    grid-template-rows:     50px 25px;
+    grid-template-areas:    ". leftlogo header rightuserdetails ."
+                            ". mainmenu mainmenu mainmenu .";
     width: 100%;
 }
 
 .leftlogo {
     grid-area: leftlogo;
-    background-color: green;
+    background-color: red;
 }
 
 .header {
@@ -38,7 +39,13 @@ input, select, textarea {
 
 .rightuserdetails {
     grid-area: rightuserdetails;
-    background-color: yellow;
+    /*background-color: yellow;*/
+    background-color: red;
+}
+
+.mainmenu {
+    grid-area: mainmenu;
+    background-color: pink;
 }
 
 
@@ -46,7 +53,7 @@ input, select, textarea {
 
 .grid {
     display: grid;
-    margin-top: 51px;
+    margin-top: 130px;
     margin-left: 1px;
     
     grid-template-columns: 10px 200px 4fr 100px 10px;
